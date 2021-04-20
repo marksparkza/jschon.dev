@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>jschon.dev | JSON Schema Validator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="static/favicon.ico">
+    <link rel="stylesheet" href="static/cyborg.bootstrap.min.css">
+</head>
+<body class="vh-100">
+<div class="d-flex flex-column h-100">
+    <div class="navbar navbar-dark bg-primary">
+        <span class="navbar-text lead">
+            jschon.dev | JSON Schema Validator
+        </span>
+        <a class="navbar-brand text-reset" href="https://github.com/marksparkza/jschon" target="_blank">
+            <img src="/static/GitHub-Mark-Light-32px.png">
+        </a>
+    </div>
+    <div class="container-fluid d-flex flex-column flex-grow-1">
+        <div class="row mt-2">
+            <div class="col">
+                <label for="schema" class="form-label">JSON Schema</label>
+            </div>
+            <div class="col">
+                <label for="instance" class="form-label">JSON Instance</label>
+            </div>
+        </div>
+        <div class="row flex-grow-1">
+            <div class="col">
+                <textarea class="form-control text-monospace h-100" id="schema"></textarea>
+            </div>
+            <div class="col">
+                <textarea class="form-control text-monospace h-100" id="instance"></textarea>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <input class="btn btn-outline-primary btn-block" id="evaluate" type="button" value="Evaluate"
+                       onclick="eval();">
+            </div>
+        </div>
+        <div class="row h-25 mb-2">
+            <div class="col">
+                <textarea class="form-control text-monospace h-100" id="result" readonly
+                          style="background-color: #ffffff"></textarea>
+            </div>
+        </div>
+        <div class="row navbar navbar-dark bg-primary">
+            <small class="navbar-text">
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear())</script>
+                Mark Jacobson
+            </small>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    function eval() {
+        try {
+            schema = JSON.parse($("#schema").val());
+        }
+        catch (e) {
+            $("#result").val("JSON Schema: " + e.message);
+            return;
+        }
+        try {
+            instance = JSON.parse($("#instance").val());
+        }
+        catch (e) {
+            $("#result").val("JSON Instance: " + e.message);
+            return;
+        }
+        $.ajax({
+            url: "evaluate",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                schema: schema,
+                instance: instance,
+            }),
+            success: function (data, textStatus, jqXHR) {
+                $("#result").val(JSON.stringify(data, null, 4));
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $("#result").val("ajax: " + textStatus);
+            },
+            timeout: 30000,
+        })
+    }
+</script>
+</body>
+</html>
