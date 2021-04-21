@@ -27,12 +27,17 @@ async def evaluate(request):
         schema = JSONSchema(request.json['schema'], metaschema_uri=metaschema_uri)
         instance = JSON(request.json['instance'])
         evaluator = JSONEvaluator(schema, instance)
-        return json({
-            'schema': evaluator.validate_schema(output_format),
-            'instance': evaluator.evaluate_instance(output_format),
-        })
+        result = {
+            'schema': (schema_validation := evaluator.validate_schema(output_format)),
+            'instance': None,
+        }
+        if schema_validation['valid']:
+            result['instance'] = evaluator.evaluate_instance(output_format)
+
     except Exception as e:
-        return json({
+        result = {
             'exception': e.__class__.__name__,
             'message': str(e),
-        })
+        }
+
+    return json(result)
