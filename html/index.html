@@ -57,39 +57,6 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script type="text/javascript">
-    function eval() {
-        try {
-            schema = JSON.parse($("#schema").val());
-        }
-        catch (e) {
-            $("#result").val("JSON Schema: " + e.message);
-            return;
-        }
-        try {
-            instance = JSON.parse($("#instance").val());
-        }
-        catch (e) {
-            $("#result").val("JSON Instance: " + e.message);
-            return;
-        }
-        $.ajax({
-            url: "evaluate",
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({
-                schema: schema,
-                instance: instance,
-            }),
-            success: function (data, textStatus, jqXHR) {
-                $("#result").val(JSON.stringify(data, null, 4));
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                $("#result").val("ajax: " + textStatus);
-            },
-            timeout: 30000,
-        })
-    }
-</script>
+<script type="text/javascript" src="static/evaluate.js"></script>
 </body>
 </html>

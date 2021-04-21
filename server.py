@@ -8,8 +8,8 @@ from jschon.catalogue import jsonschema_2019_09, jsonschema_2020_12
 
 rootdir = pathlib.Path(__file__).parent
 
-app = Sanic("jschon.dev")
-app.static('/', rootdir / 'index.html')
+app = Sanic('jschon.dev')
+app.static('/', rootdir / 'html' / 'index.html')
 app.static('/static', rootdir / 'static')
 
 
