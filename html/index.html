@@ -36,8 +36,21 @@
         </div>
         <div class="row my-2">
             <div class="col">
+                <select class="form-control" id="metaschema"
+                        title='If the "$schema" keyword is present, it will override the option selected here.'>
+                    <option value="https://json-schema.org/draft/2020-12/schema">Metaschema: 2020-12</option>
+                    <option value="https://json-schema.org/draft/2019-09/schema">Metaschema: 2019-09</option>
+                </select>
+            </div>
+            <div class="col-6">
                 <input class="btn btn-outline-primary btn-block" id="evaluate" type="button" value="Evaluate"
                        onclick="eval();">
+            </div>
+            <div class="col">
+                <select class="form-control" id="format">
+                    <option value="flag">Output: Flag</option>
+                    <option value="basic">Output: Basic</option>
+                </select>
             </div>
         </div>
         <div class="row h-25 mb-2">
@@ -55,8 +68,7 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="static/evaluate.js"></script>
 </body>
 </html>

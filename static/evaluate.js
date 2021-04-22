@@ -13,6 +13,8 @@ function eval() {
         data: JSON.stringify({
             schema: schema,
             instance: instance,
+            metaschema_uri: $("#metaschema").val(),
+            output_format: $("#format").val(),
         }),
         success: function (data, textStatus, jqXHR) {
             process(data);
@@ -30,13 +32,8 @@ function parse(element) {
     }
     catch (e) {
         element.addClass("is-invalid");
-        label = $(`label[for=${element.attr("id")}]`).text();
-        $("#result").val(function(i, curval) {
-            newval = `${label}: ${e.message}`;
-            if (curval) {
-                newval = `${curval}\n${newval}`;
-            }
-            return newval;
+        $("#result").val(function(idx, curval) {
+            return `${curval}${element.attr("id")}: ${e.message}\n`;
         });
     }
 }
