@@ -26,13 +26,13 @@ async def evaluate(request):
         output_format = OutputFormat(request.json['output_format'])
         schema = JSONSchema(request.json['schema'], metaschema_uri=metaschema_uri)
         instance = JSON(request.json['instance'])
-        evaluator = JSONEvaluator(schema, instance)
+        evaluator = JSONEvaluator(schema)
         result = {
             'schema': (schema_validation := evaluator.validate_schema(output_format)),
             'instance': None,
         }
         if schema_validation['valid']:
-            result['instance'] = evaluator.evaluate_instance(output_format)
+            result['instance'] = evaluator.evaluate_instance(instance, output_format)
 
     except Exception as e:
         result = {
