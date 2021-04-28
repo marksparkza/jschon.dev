@@ -1,10 +1,10 @@
 import pathlib
 
 from sanic import Sanic
+from sanic.request import Request
 from sanic.response import json
 
-from jschon import JSON, JSONSchema, JSONEvaluator, OutputFormat, URI
-from jschon.catalogue import jsonschema_2019_09, jsonschema_2020_12
+from jschon import JSON, JSONEvaluator, OutputFormat, URI, Catalogue
 
 rootdir = pathlib.Path(__file__).parent
 
@@ -12,20 +12,22 @@ app = Sanic('jschon.dev')
 app.static('/', rootdir / 'html' / 'index.html')
 app.static('/static', rootdir / 'static')
 
-
-@app.main_process_start
-async def init_catalogue(app, loop):
-    jsonschema_2019_09.initialize()
-    jsonschema_2020_12.initialize()
+metaschema_uris = {
+    '2019-09': URI("https://json-schema.org/draft/2019-09/schema"),
+    '2020-12': URI("https://json-schema.org/draft/2020-12/schema"),
+}
 
 
 @app.post('/evaluate')
-async def evaluate(request):
+async def evaluate(request: Request):
     try:
-        metaschema_uri = URI(request.json['metaschema_uri'])
-        output_format = OutputFormat(request.json['output_format'])
-        schema = JSONSchema(request.json['schema'], metaschema_uri=metaschema_uri)
+        catalogue = Catalogue('2019-09', '2020-12')
+        schema = catalogue.create_schema(
+            request.json['schema'],
+            metaschema_uri=metaschema_uris[request.json['version']],
+        )
         instance = JSON(request.json['instance'])
+        output_format = OutputFormat(request.json['format'])
         evaluator = JSONEvaluator(schema)
         result = {
             'schema': (schema_validation := evaluator.validate_schema(output_format)),

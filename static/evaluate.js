@@ -13,8 +13,8 @@ function eval() {
         data: JSON.stringify({
             schema: schema,
             instance: instance,
-            metaschema_uri: $("#metaschema").val(),
-            output_format: $("#format").val(),
+            version: $("#version").val(),
+            format: $("#format").val(),
         }),
         success: function (data, textStatus, jqXHR) {
             process(data);
