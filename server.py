@@ -21,10 +21,10 @@ metaschema_uris = {
 @app.post('/evaluate')
 async def evaluate(request: Request):
     try:
-        catalogue = Catalogue('2019-09', '2020-12')
+        catalogue = Catalogue(version := request.json['version'])
         schema = catalogue.create_schema(
             request.json['schema'],
-            metaschema_uri=metaschema_uris[request.json['version']],
+            metaschema_uri=metaschema_uris[version],
         )
         instance = JSON(request.json['instance'])
         output_format = OutputFormat(request.json['format'])
