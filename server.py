@@ -24,6 +24,7 @@ async def evaluate(request: Request):
         catalogue = Catalogue(version := request.json['version'])
         schema = catalogue.create_schema(
             request.json['schema'],
+            uri=URI('https://jschon.dev/schema'),
             metaschema_uri=metaschema_uris[version],
         )
         instance = JSON(request.json['instance'])
