@@ -4,7 +4,7 @@ from sanic import Sanic
 from sanic.request import Request
 from sanic.response import json
 
-from jschon import JSON, JSONEvaluator, OutputFormat, URI, Catalogue
+from jschon import JSON, Evaluator, OutputFormat, URI, Catalogue
 
 rootdir = pathlib.Path(__file__).parent
 
@@ -29,7 +29,7 @@ async def evaluate(request: Request):
         )
         instance = JSON(request.json['instance'])
         output_format = OutputFormat(request.json['format'])
-        evaluator = JSONEvaluator(schema)
+        evaluator = Evaluator(schema)
         result = {
             'schema': (schema_validation := evaluator.validate_schema(output_format)),
             'instance': None,
