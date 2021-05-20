@@ -4,7 +4,7 @@ from sanic import Sanic
 from sanic.request import Request
 from sanic.response import json
 
-from jschon import JSON, Evaluator, OutputFormat, URI, Catalogue
+from jschon import Catalogue, Evaluator, JSON, JSONSchema, OutputFormat, URI
 
 rootdir = pathlib.Path(__file__).parent
 
@@ -22,8 +22,9 @@ metaschema_uris = {
 async def evaluate(request: Request):
     try:
         catalogue = Catalogue(version := request.json['version'])
-        schema = catalogue.create_schema(
+        schema = JSONSchema(
             request.json['schema'],
+            catalogue=catalogue,
             uri=URI('https://jschon.dev/schema'),
             metaschema_uri=metaschema_uris[version],
         )
