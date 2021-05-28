@@ -5,17 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="static/favicon.ico">
-    <link rel="stylesheet" href="static/cyborg.bootstrap.min.css">
+    <link rel="stylesheet" href="static/cerulean.bootstrap.min.css">
 </head>
 <body class="vh-100">
 <div class="d-flex flex-column h-100">
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-text lead">
             jschon.dev | JSON Schema Validator
         </span>
         <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><img src="/static/GitHub-Mark-Light-32px.png"></a>
-            <div class="dropdown-menu dropdown-menu-right">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><img src="/static/GitHub-Mark-Light-32px.png"></a>
+            <div class="dropdown-menu dropdown-menu-end">
                 <a class="dropdown-item" href="https://github.com/marksparkza/jschon" target="_blank">jschon</a>
                 <a class="dropdown-item" href="https://github.com/marksparkza/jschon.dev" target="_blank">jschon.dev</a>
             </div>
@@ -32,10 +32,10 @@
         </div>
         <div class="row flex-grow-1">
             <div class="col">
-                <textarea class="form-control text-monospace h-100" id="schema"></textarea>
+                <textarea class="form-control font-monospace h-100" id="schema"></textarea>
             </div>
             <div class="col">
-                <textarea class="form-control text-monospace h-100" id="instance"></textarea>
+                <textarea class="form-control font-monospace h-100" id="instance"></textarea>
             </div>
         </div>
         <div class="row my-2">
@@ -45,8 +45,8 @@
                     <option value="2019-09">Version: 2019-09</option>
                 </select>
             </div>
-            <div class="col-6">
-                <input class="btn btn-outline-primary btn-block" id="evaluate" type="button" value="Evaluate"
+            <div class="col-6 d-grid">
+                <input class="btn btn-secondary" id="evaluate" type="button" value="Evaluate"
                        onclick="eval();">
             </div>
             <div class="col">
@@ -58,21 +58,21 @@
         </div>
         <div class="row h-25 mb-2">
             <div class="col">
-                <textarea class="form-control text-monospace h-100" id="result" readonly
+                <textarea class="form-control font-monospace h-100" id="result" readonly
                           style="background-color: #ffffff"></textarea>
             </div>
         </div>
-        <footer class="row navbar navbar-dark bg-primary">
-            <small class="navbar-text">
-                Copyright &copy;
-                <script>document.write(new Date().getFullYear())</script>
-                Mark Jacobson
-            </small>
-        </footer>
     </div>
+    <footer>
+        <small>
+            Copyright &copy;
+            <script>document.write(new Date().getFullYear())</script>
+            Mark Jacobson
+        </small>
+    </footer>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 <script type="text/javascript" src="static/evaluate.js"></script>
 </body>
 </html>
