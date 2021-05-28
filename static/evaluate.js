@@ -1,6 +1,6 @@
 function eval() {
-    $("#schema,#instance,#result").removeClass("is-valid is-invalid");
-    $("#result").val("");
+    $("#schema,#instance").removeClass("is-valid is-invalid");
+    $("#result").text("");
     schema = parse($("#schema"));
     instance = parse($("#instance"));
     if ($("#schema,#instance").hasClass("is-invalid")) {
@@ -20,7 +20,7 @@ function eval() {
             process(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            $("#result").val("ajax: " + textStatus);
+            $("#result").text("ajax: " + textStatus);
         },
         timeout: 30000,
     })
@@ -32,7 +32,7 @@ function parse(element) {
     }
     catch (e) {
         element.addClass("is-invalid");
-        $("#result").val(function(idx, curval) {
+        $("#result").text(function(idx, curval) {
             return `${curval}${element.attr("id")}: ${e.message}\n`;
         });
     }
@@ -47,13 +47,12 @@ function process(result) {
             } else {
                 $("#instance").addClass("is-invalid");
             }
-            $("#result").val(JSON.stringify(result.instance, null, 4));
+            $("#result").text(JSON.stringify(result.instance, null, 4));
         } else {
             $("#schema").addClass("is-invalid");
-            $("#result").val(JSON.stringify(result, null, 4));
+            $("#result").text(JSON.stringify(result, null, 4));
         }
     } else {
-        $("#result").addClass("is-invalid");
-        $("#result").val(JSON.stringify(result, null, 4));
+        $("#result").text(JSON.stringify(result, null, 4));
     }
 }
