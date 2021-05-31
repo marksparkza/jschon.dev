@@ -4,7 +4,7 @@ from sanic import Sanic
 from sanic.request import Request
 from sanic.response import json
 
-from jschon import Catalogue, Evaluator, JSON, JSONSchema, OutputFormat, URI
+from jschon import Catalogue, JSON, JSONSchema, URI
 
 rootdir = pathlib.Path(__file__).parent
 
@@ -29,14 +29,13 @@ async def evaluate(request: Request):
             metaschema_uri=metaschema_uris[version],
         )
         instance = JSON(request.json['instance'])
-        output_format = OutputFormat(request.json['format'])
-        evaluator = Evaluator(schema)
+        format = request.json['format']
         result = {
-            'schema': (schema_validation := evaluator.validate_schema(output_format)),
+            'schema': (schema_result := schema.metaschema.evaluate(schema).output(format)),
             'instance': None,
         }
-        if schema_validation['valid']:
-            result['instance'] = evaluator.evaluate_instance(instance, output_format)
+        if schema_result['valid']:
+            result['instance'] = schema.evaluate(instance).output(format)
 
     except Exception as e:
         result = {
