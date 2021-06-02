@@ -1,3 +1,4 @@
+import os
 import pathlib
 
 from sanic import Sanic
@@ -11,6 +12,7 @@ rootdir = pathlib.Path(__file__).parent
 app = Sanic('jschon.dev')
 app.static('/', rootdir / 'html' / 'index.html')
 app.static('/static', rootdir / 'static')
+app.config.FORWARDED_SECRET = os.getenv('FORWARDED_SECRET')
 
 metaschema_uris = {
     '2019-09': URI("https://json-schema.org/draft/2019-09/schema"),
