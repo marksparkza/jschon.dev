@@ -31,7 +31,7 @@ async def evaluate(request: Request):
         instance = JSON(request.json['instance'])
         format = request.json['format']
         result = {
-            'schema': (schema_result := schema.metaschema.evaluate(schema).output(format)),
+            'schema': (schema_result := schema.validate().output(format)),
             'instance': None,
         }
         if schema_result['valid']:
