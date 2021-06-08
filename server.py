@@ -30,12 +30,13 @@ async def evaluate(request: Request):
         )
         instance = JSON(request.json['instance'])
         format = request.json['format']
-        result = {
-            'schema': (schema_result := schema.validate().output(format)),
-            'instance': None,
-        }
-        if schema_result['valid']:
-            result['instance'] = schema.evaluate(instance).output(format)
+
+        schema_result = schema.validate().output(format)
+
+        if not schema_result['valid']:
+            result = {'schema': schema_result}
+        else:
+            result = {'instance': schema.evaluate(instance).output(format)}
 
     except Exception as e:
         result = {

@@ -22,7 +22,7 @@
             </div>
         </div>
     </nav>
-    <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark border-2" style="height: 57vh">
+    <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark border-2" style="height: 47vh">
         <div class="row mt-2">
             <div class="col">
                 <label for="schema" class="form-label">JSON Schema</label>
@@ -44,8 +44,8 @@
         <div class="row my-3">
             <div class="col">
                 <select id="version" class="form-control">
-                    <option value="2020-12">Version: 2020-12</option>
-                    <option value="2019-09">Version: 2019-09</option>
+                    <option value="2020-12">Metaschema: 2020-12</option>
+                    <option value="2019-09">Metaschema: 2019-09</option>
                 </select>
             </div>
             <div class="col-6 d-grid">
@@ -61,7 +61,11 @@
             </div>
         </div>
     </div>
-    <div class="m-2 p-2 flex-grow-1">
+    <div class="m-3">
+        <span id="result-caption" class="fs-5"></span>
+        <p id="result-subcaption" class="text-muted d-none"></p>
+    </div>
+    <div class="mx-3 flex-grow-1">
         <pre id="result"></pre>
     </div>
     <hr>
