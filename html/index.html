@@ -14,15 +14,23 @@
         <span class="navbar-text h5 mt-2">
             jschon.dev | JSON Schema Sandbox
         </span>
-        <div class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><img src="/static/GitHub-Mark-Light-32px.png"></a>
-            <div class="dropdown-menu dropdown-menu-end">
-                <a class="dropdown-item" href="https://github.com/marksparkza/jschon" target="_blank">jschon</a>
-                <a class="dropdown-item" href="https://github.com/marksparkza/jschon.dev" target="_blank">jschon.dev</a>
-            </div>
-        </div>
+        <ul class="nav justify-content-end">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><img src="/static/readthedocs-logo-light.svg" style="height: 32px"></a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="https://jschon.readthedocs.io/en/stable/" target="_blank">Documentation</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><img src="/static/GitHub-Mark-Light-32px.png"></a>
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item" href="https://github.com/marksparkza/jschon" target="_blank">jschon</a>
+                    <a class="dropdown-item" href="https://github.com/marksparkza/jschon.dev" target="_blank">jschon.dev</a>
+                </div>
+            </li>
+        </ul>
     </nav>
-    <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark border-2" style="height: 47vh">
+    <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark border-2" style="height: 46vh">
         <div class="row mt-2">
             <div class="col">
                 <label for="schema" class="form-label">JSON Schema</label>
