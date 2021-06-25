@@ -4,7 +4,7 @@ from sanic import Sanic
 from sanic.request import Request
 from sanic.response import json
 
-from jschon import Catalogue, JSON, JSONSchema, URI
+from jschon import create_catalogue, JSON, JSONSchema, URI
 
 rootdir = pathlib.Path(__file__).parent
 
@@ -17,31 +17,33 @@ metaschema_uris = {
     '2020-12': URI("https://json-schema.org/draft/2020-12/schema"),
 }
 
+catalogue = create_catalogue('2019-09', '2020-12', default=True)
+
 
 @app.post('/evaluate')
 async def evaluate(request: Request):
-    try:
-        catalogue = Catalogue(version := request.json['version'])
-        schema = JSONSchema(
-            request.json['schema'],
-            catalogue=catalogue,
-            uri=URI('https://jschon.dev/schema'),
-            metaschema_uri=metaschema_uris[version],
-        )
-        instance = JSON(request.json['instance'])
-        format = request.json['format']
+    with catalogue.session() as session:
+        try:
+            schema = JSONSchema(
+                request.json['schema'],
+                session=session,
+                uri=URI('https://jschon.dev/schema'),
+                metaschema_uri=metaschema_uris[request.json['version']],
+            )
+            instance = JSON(request.json['instance'])
+            format = request.json['format']
 
-        schema_result = schema.validate().output(format)
+            schema_result = schema.validate().output(format)
 
-        if not schema_result['valid']:
-            result = {'schema': schema_result}
-        else:
-            result = {'instance': schema.evaluate(instance).output(format)}
+            if not schema_result['valid']:
+                result = {'schema': schema_result}
+            else:
+                result = {'instance': schema.evaluate(instance).output(format)}
 
-    except Exception as e:
-        result = {
-            'exception': e.__class__.__name__,
-            'message': str(e),
-        }
+        except Exception as e:
+            result = {
+                'exception': e.__class__.__name__,
+                'message': str(e),
+            }
 
-    return json(result)
+        return json(result)
