@@ -4,7 +4,7 @@ from sanic import Sanic
 from sanic.request import Request
 from sanic.response import json
 
-from jschon import create_catalogue, JSON, JSONSchema, URI
+from jschon import create_catalog, JSON, JSONSchema, URI
 
 rootdir = pathlib.Path(__file__).parent
 
@@ -17,12 +17,12 @@ metaschema_uris = {
     '2020-12': URI("https://json-schema.org/draft/2020-12/schema"),
 }
 
-catalogue = create_catalogue('2019-09', '2020-12', default=True)
+catalog = create_catalog('2019-09', '2020-12', default=True)
 
 
 @app.post('/evaluate')
 async def evaluate(request: Request):
-    with catalogue.session() as session:
+    with catalog.session() as session:
         try:
             schema = JSONSchema(
                 request.json['schema'],
