@@ -1,16 +1,19 @@
 import pathlib
 
+from jinja2 import Environment, FileSystemLoader
 from sanic import Sanic
 from sanic.request import Request
-from sanic.response import json
+from sanic.response import json, html
 
+import jschon
 from jschon import create_catalog, JSON, JSONSchema, URI
 
 rootdir = pathlib.Path(__file__).parent
 
 app = Sanic('jschon.dev')
-app.static('/', rootdir / 'html' / 'index.html')
 app.static('/static', rootdir / 'static')
+
+template_env = Environment(loader=FileSystemLoader('templates'), autoescape=True)
 
 metaschema_uris = {
     '2019-09': URI("https://json-schema.org/draft/2019-09/schema"),
@@ -18,6 +21,12 @@ metaschema_uris = {
 }
 
 catalog = create_catalog('2019-09', '2020-12', default=True)
+
+
+@app.get('/')
+async def index(request: Request):
+    template = template_env.get_template('index.html')
+    return html(template.render(version=jschon.__version__))
 
 
 @app.post('/evaluate')
