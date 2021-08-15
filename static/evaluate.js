@@ -10,6 +10,9 @@ function eval() {
     if ($("#schema,#instance").hasClass("is-invalid")) {
         return;
     }
+    if (schema.$schema) {
+        $("#metaschema-uri").val(schema.$schema);
+    }
 
     $.ajax({
         url: "evaluate",
@@ -18,8 +21,8 @@ function eval() {
         data: JSON.stringify({
             schema: schema,
             instance: instance,
-            version: $("#version").val(),
-            format: $("#format").val(),
+            metaschema_uri: $("#metaschema-uri").val(),
+            output_format: $("#output-format").val(),
         }),
         success: function (data, textStatus, jqXHR) {
             process(data);
@@ -74,4 +77,10 @@ function process(result) {
         $("#result-caption").text("Server error");
         $("#result-caption").addClass("text-danger");
     }
+}
+
+function set$schema() {
+    schema = JSON.parse($("#schema").val());
+    schema.$schema = $("#metaschema-uri").children("option:selected").val();
+    $("#schema").val(JSON.stringify(schema, null, 4));
 }

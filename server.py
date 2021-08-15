@@ -15,11 +15,6 @@ app.static('/static', rootdir / 'static')
 
 template_env = Environment(loader=FileSystemLoader('templates'), autoescape=True)
 
-metaschema_uris = {
-    '2019-09': URI("https://json-schema.org/draft/2019-09/schema"),
-    '2020-12': URI("https://json-schema.org/draft/2020-12/schema"),
-}
-
 catalog = create_catalog('2019-09', '2020-12', default=True)
 
 
@@ -33,21 +28,20 @@ async def index(request: Request):
 async def evaluate(request: Request):
     with catalog.session() as session:
         try:
+            metaschema_uri = request.json['metaschema_uri']
+            output_format = request.json['output_format']
             schema = JSONSchema(
                 request.json['schema'],
                 session=session,
-                uri=URI('https://jschon.dev/schema'),
-                metaschema_uri=metaschema_uris[request.json['version']],
+                metaschema_uri=URI(metaschema_uri) if metaschema_uri else None,
             )
             instance = JSON(request.json['instance'])
-            format = request.json['format']
 
-            schema_result = schema.validate().output(format)
-
+            schema_result = schema.validate().output(output_format)
             if not schema_result['valid']:
                 result = {'schema': schema_result}
             else:
-                result = {'instance': schema.evaluate(instance).output(format)}
+                result = {'instance': schema.evaluate(instance).output(output_format)}
 
         except Exception as e:
             result = {

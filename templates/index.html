@@ -46,7 +46,7 @@
         <div class="row flex-grow-1">
             <div class="col">
                 <textarea id="schema" class="form-control font-monospace h-100"
-                          style="resize: none; white-space: pre;">{}</textarea>
+                          style="resize: none; white-space: pre;">{"$id": "https://jschon.dev/schema"}</textarea>
             </div>
             <div class="col">
                 <textarea id="instance" class="form-control font-monospace h-100"
@@ -55,9 +55,9 @@
         </div>
         <div class="row my-3">
             <div class="col">
-                <select id="version" class="form-control">
-                    <option value="2020-12">Metaschema: 2020-12</option>
-                    <option value="2019-09">Metaschema: 2019-09</option>
+                <select id="metaschema-uri" class="form-control" onchange="set$schema();">
+                    <option value="https://json-schema.org/draft/2019-09/schema">Metaschema: 2019-09</option>
+                    <option value="https://json-schema.org/draft/2020-12/schema" selected>Metaschema: 2020-12</option>
                 </select>
             </div>
             <div class="col-6 d-grid">
@@ -65,7 +65,7 @@
                        class="btn btn-secondary">
             </div>
             <div class="col">
-                <select id="format" class="form-control">
+                <select id="output-format" class="form-control">
                     <option value="flag">Output: Flag</option>
                     <option value="basic">Output: Basic</option>
                     <option value="detailed" selected>Output: Detailed</option>
@@ -94,9 +94,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU" crossorigin="anonymous"></script>
+<script src="static/evaluate.js"></script>
 <script>
     $("#input-panel").resizable({handles: "s", minHeight: 200});
+    set$schema();
 </script>
-<script type="text/javascript" src="static/evaluate.js"></script>
 </body>
 </html>
