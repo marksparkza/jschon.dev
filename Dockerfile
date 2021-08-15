@@ -2,6 +2,7 @@ FROM python:3.9
 
 WORKDIR /srv/jschon.dev
 COPY server.py requirements.txt ./
+COPY static static/
 COPY templates templates/
 RUN pip install -r requirements.txt
 
