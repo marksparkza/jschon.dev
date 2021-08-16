@@ -17,7 +17,7 @@
         <ul class="nav justify-content-end">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                    <img src="/static/readthedocs-logo-light.svg" style="height: 30px">
+                    <img src="static/readthedocs-logo-light.svg" style="height: 30px">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="https://jschon.readthedocs.io/en/stable/" target="_blank">Read the docs</a>
@@ -25,7 +25,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                    <img src="/static/GitHub-Mark-Light-64px.png" style="height: 30px">
+                    <img src="static/GitHub-Mark-Light-64px.png" style="height: 30px">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="https://github.com/marksparkza/jschon" target="_blank">jschon</a>
@@ -34,7 +34,8 @@
             </li>
         </ul>
     </nav>
-    <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark border-2" style="height: 46vh">
+    <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark border-2"
+         style="height: 47vh" onresize="schemaEditor.resize(); instanceEditor.resize();">
         <div class="row mt-2">
             <div class="col">
                 <label for="schema" class="form-label">JSON Schema</label>
@@ -45,12 +46,10 @@
         </div>
         <div class="row flex-grow-1">
             <div class="col">
-                <textarea id="schema" class="form-control font-monospace h-100"
-                          style="resize: none; white-space: pre;">{"$id": "https://jschon.dev/schema"}</textarea>
+                <div id="schema" class="form-control rounded-0 w-100 h-100">{"$id": "https://jschon.dev/schema"}</div>
             </div>
             <div class="col">
-                <textarea id="instance" class="form-control font-monospace h-100"
-                          style="resize: none; white-space: pre;">{}</textarea>
+                <div id="instance" class="form-control rounded-0 w-100 h-100">{}</div>
             </div>
         </div>
         <div class="row my-3">
@@ -94,8 +93,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU" crossorigin="anonymous"></script>
-<script src="static/evaluate.js"></script>
+<script src="static/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/evaluate.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    ace.config.set("basePath", "static/ace-builds/src-min-noconflict");
+    editorOptions = {
+        mode: "ace/mode/json",
+        theme: "ace/theme/clouds",
+        fontSize: "14px",
+        printMargin: false,
+        highlightActiveLine: false,
+    };
+    var schemaEditor = ace.edit("schema", editorOptions);
+    var instanceEditor = ace.edit("instance", editorOptions);
+
     $("#input-panel").resizable({handles: "s", minHeight: 200});
     set$schema();
 </script>

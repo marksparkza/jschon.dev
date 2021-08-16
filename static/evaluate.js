@@ -5,8 +5,8 @@ function eval() {
     $("#result-caption").removeClass("text-success text-danger");
     $("#result-subcaption").addClass("d-none");
 
-    schema = parse($("#schema"));
-    instance = parse($("#instance"));
+    schema = parse($("#schema"), schemaEditor);
+    instance = parse($("#instance"), instanceEditor);
     if ($("#schema,#instance").hasClass("is-invalid")) {
         return;
     }
@@ -36,9 +36,9 @@ function eval() {
     })
 }
 
-function parse(element) {
+function parse(element, editor) {
     try {
-        return JSON.parse(element.val());
+        return JSON.parse(editor.getValue());
     }
     catch (e) {
         element.addClass("is-invalid");
@@ -80,7 +80,8 @@ function process(result) {
 }
 
 function set$schema() {
-    schema = JSON.parse($("#schema").val());
+    schema = JSON.parse(schemaEditor.getValue());
     schema.$schema = $("#metaschema-uri").children("option:selected").val();
-    $("#schema").val(JSON.stringify(schema, null, 4));
+    schemaEditor.setValue(JSON.stringify(schema, null, 4));
+    schemaEditor.gotoLine(1);
 }
