@@ -10,7 +10,7 @@ httptools==0.3.0
     # via sanic
 jinja2==3.0.1
     # via -r requirements.in
-jschon==0.7.1
+jschon==0.7.2
     # via -r requirements.in
 markupsafe==2.0.1
     # via jinja2
@@ -22,7 +22,7 @@ sanic==21.6.2
     # via -r requirements.in
 sanic-routing==0.7.1
     # via sanic
-ujson==4.0.2
+ujson==4.1.0
     # via sanic
 uvloop==0.16.0
     # via sanic
