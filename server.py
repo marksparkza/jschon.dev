@@ -15,7 +15,7 @@ app.static('/static', rootdir / 'static')
 
 template_env = Environment(loader=FileSystemLoader('templates'), autoescape=True)
 
-catalog = create_catalog('2019-09', '2020-12', default=True)
+catalog = create_catalog('2019-09', '2020-12')
 
 
 @app.get('/')
