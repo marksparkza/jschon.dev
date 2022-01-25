@@ -4,11 +4,11 @@
 #
 #    pip-compile
 #
-aiofiles==0.7.0
+aiofiles==0.8.0
     # via sanic
 httptools==0.3.0
     # via sanic
-jinja2==3.0.2
+jinja2==3.0.3
     # via -r requirements.in
 jschon==0.7.3
     # via -r requirements.in
@@ -16,15 +16,15 @@ markupsafe==2.0.1
     # via jinja2
 multidict==5.2.0
     # via sanic
-rfc3986==1.5.0
+rfc3986==2.0.0
     # via jschon
-sanic==21.9.1
+sanic==21.12.1
     # via -r requirements.in
-sanic-routing==0.7.1
+sanic-routing==0.7.2
     # via sanic
-ujson==4.2.0
+ujson==5.1.0
     # via sanic
 uvloop==0.16.0
     # via sanic
-websockets==10.0
+websockets==10.1
     # via sanic

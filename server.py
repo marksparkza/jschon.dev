@@ -10,7 +10,7 @@ from jschon import create_catalog, JSON, JSONSchema, URI
 
 rootdir = pathlib.Path(__file__).parent
 
-app = Sanic('jschon.dev')
+app = Sanic('jschon-dev')
 app.static('/static', rootdir / 'static')
 
 template_env = Environment(loader=FileSystemLoader('templates'), autoescape=True)
