@@ -10,7 +10,7 @@ httptools==0.3.0
     # via sanic
 jinja2==3.0.3
     # via -r requirements.in
-jschon==0.7.3
+jschon==0.8.1
     # via -r requirements.in
 markupsafe==2.0.1
     # via jinja2
