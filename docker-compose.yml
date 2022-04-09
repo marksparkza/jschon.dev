@@ -8,4 +8,4 @@ services:
       - "8000:8000"
     environment:
       - SANIC_FORWARDED_SECRET
-    restart: always
+    restart: unless-stopped
