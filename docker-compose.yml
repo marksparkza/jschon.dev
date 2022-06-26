@@ -1,11 +1,33 @@
 version: "3.8"
 
 services:
-  jschon.dev:
-    container_name: jschon.dev
-    build: .
+  jschon-api-next:
+    container_name: jschon-api-next
+    build:
+      context: .
+      dockerfile: dockerfile-api
+      args:
+        - BRANCH=next
+    restart: unless-stopped
+
+  jschon-api-stable:
+    container_name: jschon-api-stable
+    build:
+      context: .
+      dockerfile: dockerfile-api
+      args:
+        - BRANCH=stable
+    restart: unless-stopped
+
+  jschon-ui:
+    container_name: jschon-ui
+    build:
+      context: .
+      dockerfile: dockerfile-ui
     ports:
       - "8000:8000"
     environment:
-      - SANIC_FORWARDED_SECRET
+      - JSCHON_API_NEXT=http://jschon-api-next:8000
+      - JSCHON_API_STABLE=http://jschon-api-stable:8000
+      - JSCHON_FORWARDED_SECRET
     restart: unless-stopped

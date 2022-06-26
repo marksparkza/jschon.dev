@@ -1,31 +1,19 @@
-import pathlib
+from sanic import HTTPResponse, Request, Sanic, json, text
 
-from jinja2 import Environment, FileSystemLoader
-from sanic import Sanic
-from sanic.request import Request
-from sanic.response import json, html
+from jschon import JSON, JSONSchema, URI, __version__, create_catalog
 
-import jschon
-from jschon import create_catalog, JSON, JSONSchema, URI
-
-rootdir = pathlib.Path(__file__).parent
-
-app = Sanic('jschon-dev')
-app.static('/static', rootdir / 'static')
-
-template_env = Environment(loader=FileSystemLoader('templates'), autoescape=True)
+app = Sanic('jschon-api')
 
 catalog = create_catalog('2019-09', '2020-12')
 
 
-@app.get('/')
-async def index(request: Request):
-    template = template_env.get_template('index.html')
-    return html(template.render(version=jschon.__version__))
+@app.get('/version')
+async def version(request: Request) -> HTTPResponse:
+    return text(__version__)
 
 
 @app.post('/evaluate')
-async def evaluate(request: Request):
+async def evaluate(request: Request) -> HTTPResponse:
     with catalog.session() as session:
         try:
             metaschema_uri = request.json['metaschema_uri']

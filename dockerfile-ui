@@ -1,0 +1,12 @@
+FROM python:3.10
+
+WORKDIR /srv
+
+COPY ui.py ./
+COPY static static/
+COPY templates templates/
+
+COPY requirements-ui.txt ./
+RUN pip install -r requirements-ui.txt
+
+CMD ["sanic", "ui.app", "--host=0.0.0.0", "--port=8000", "--workers=4", "--no-access-logs"]
