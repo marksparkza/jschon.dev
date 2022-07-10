@@ -70,7 +70,7 @@ function process(result) {
         $("#result").html(linkify(JSON.stringify(result.schema, null, 4), 'schemaEditor'));
         $("#result-caption").text("The schema is invalid.");
         $("#result-caption").addClass("text-danger");
-        $("#result-subcaption").text("The output below is the result of the metaschema's evaluation of the schema.");
+        $("#result-subcaption").text("The output shows the meta-schema's evaluation of the schema.");
         $("#result-subcaption").removeClass("d-none");
     }
     else {
