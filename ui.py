@@ -1,4 +1,6 @@
+import json
 import pathlib
+from typing import Any
 
 import requests
 from jinja2 import Environment, FileSystemLoader
@@ -22,6 +24,21 @@ api = {
 }
 
 
+def callapi(branch: str, method: str, path: str, data: Any) -> HTTPResponse:
+    try:
+        r = requests.request(method, f'{api[branch]}{path}', json=data)
+        r.raise_for_status()
+        result = r.json()
+
+    except Exception as e:
+        result = {
+            'exception': e.__class__.__name__,
+            'message': str(e),
+        }
+
+    return json(result)
+
+
 def version(branch: str) -> str:
     r = requests.get(f'{api[branch]}/version')
     r.raise_for_status()
@@ -39,6 +56,9 @@ async def index(request: Request) -> HTTPResponse:
 
 @app.post('/<branch:str>/evaluate')
 async def evaluate(request: Request, branch: str) -> HTTPResponse:
-    r = requests.post(f'{api[branch]}/evaluate', json=request.json)
-    r.raise_for_status()
-    return json(r.json())
+    return callapi(branch, 'post', '/evaluate', request.json)
+
+
+@app.post('/<branch:str>/select/<loc:path>')
+async def select(request: Request, branch: str, loc: str) -> HTTPResponse:
+    return callapi(branch, 'post', f'/select/{loc}', request.json)
