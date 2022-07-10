@@ -1,4 +1,11 @@
 function jumpTo(loc, editor) {
+    try {
+        JSON.parse(editor.getValue());
+    }
+    catch (e) {
+        alert(e.message);
+        return;
+    }
     $.ajax({
         url: $("#branch").val() + "/select" + loc,
         method: "POST",
