@@ -14,7 +14,7 @@ multidict==6.0.2
     # via sanic
 rfc3986==2.0.0
     # via jschon
-sanic==22.6.0
+sanic==22.6.2
     # via -r requirements-api-next.in
 sanic-routing==22.3.0
     # via sanic
