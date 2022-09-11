@@ -4,11 +4,11 @@
 #
 #    pip-compile requirements-ui.in
 #
-aiofiles==0.8.0
+aiofiles==22.1.0
     # via sanic
-certifi==2022.6.15
+certifi==2022.6.15.1
     # via requests
-charset-normalizer==2.1.0
+charset-normalizer==2.1.1
     # via requests
 httptools==0.4.0
     # via sanic
@@ -28,7 +28,7 @@ sanic-routing==22.3.0
     # via sanic
 ujson==5.4.0
     # via sanic
-urllib3==1.26.11
+urllib3==1.26.12
     # via requests
 uvloop==0.16.0
     # via sanic
