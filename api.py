@@ -14,13 +14,13 @@ async def version(request: Request) -> HTTPResponse:
 
 @app.post('/evaluate')
 async def evaluate(request: Request) -> HTTPResponse:
-    with catalog.session() as session:
+    with catalog.cache() as cacheid:
         try:
             metaschema_uri = request.json['metaschema_uri']
             output_format = request.json['output_format']
             schema = JSONSchema(
                 request.json['schema'],
-                session=session,
+                cacheid=cacheid,
                 metaschema_uri=URI(metaschema_uri) if metaschema_uri else None,
             )
             instance = JSON(request.json['instance'])
