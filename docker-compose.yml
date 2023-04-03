@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   jschon-api-next:
     container_name: jschon-api-next
@@ -8,6 +6,8 @@ services:
       dockerfile: dockerfile-api
       args:
         - BRANCH=next
+    environment:
+      - PYTHONUNBUFFERED=1
     restart: unless-stopped
 
   jschon-api-stable:
@@ -17,6 +17,8 @@ services:
       dockerfile: dockerfile-api
       args:
         - BRANCH=stable
+    environment:
+      - PYTHONUNBUFFERED=1
     restart: unless-stopped
 
   jschon-ui:
@@ -30,4 +32,5 @@ services:
       - JSCHON_API_NEXT=http://jschon-api-next:8000
       - JSCHON_API_STABLE=http://jschon-api-stable:8000
       - JSCHON_FORWARDED_SECRET
+      - PYTHONUNBUFFERED=1
     restart: unless-stopped
