@@ -36,5 +36,5 @@ urllib3==1.26.15
     # via requests
 uvloop==0.17.0
     # via sanic
-websockets==11.0.1
+websockets==11.0.2
     # via sanic
