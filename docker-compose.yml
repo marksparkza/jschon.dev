@@ -1,22 +1,9 @@
 services:
-  jschon-api-next:
-    container_name: jschon-api-next
+  jschon-api:
+    container_name: jschon-api
     build:
       context: .
-      dockerfile: dockerfile-api
-      args:
-        - BRANCH=next
-    environment:
-      - PYTHONUNBUFFERED=1
-    restart: unless-stopped
-
-  jschon-api-stable:
-    container_name: jschon-api-stable
-    build:
-      context: .
-      dockerfile: dockerfile-api
-      args:
-        - BRANCH=stable
+      dockerfile: api/dockerfile
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
@@ -25,12 +12,11 @@ services:
     container_name: jschon-ui
     build:
       context: .
-      dockerfile: dockerfile-ui
+      dockerfile: ui/dockerfile
     ports:
-      - "8000:8000"
+      - "8888:8888"
     environment:
-      - JSCHON_API_NEXT=http://jschon-api-next:8000
-      - JSCHON_API_STABLE=http://jschon-api-stable:8000
+      - JSCHON_API=http://jschon-api:4444
       - JSCHON_FORWARDED_SECRET
       - PYTHONUNBUFFERED=1
     restart: unless-stopped

@@ -7,7 +7,7 @@ function jumpTo(loc, editor) {
         return;
     }
     $.ajax({
-        url: $("#branch").val() + "/select" + loc,
+        url: "/select" + loc,
         method: "POST",
         contentType: "application/json",
         data: editor.getValue(),

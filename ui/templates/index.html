@@ -1,41 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title id="title">
-        jschon.dev
-    </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="/static/favicon.ico">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.1/dist/cerulean/bootstrap.min.css" integrity="sha256-0UiGxiZByjUhEbxgTFZnqkriiq55ZRLx34PeJPtFjAs=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css" integrity="sha256-sEGfrwMkIjbgTBwGLVK38BG/XwIiNC/EAG9Rzsfda6A=" crossorigin="anonymous">
+
+    <title>
+        jschon {{ version }}
+    </title>
+
+    {% include 'lib.html' %}
 </head>
 <body>
+
 <div class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-dark bg-dark p-3">
         <a class="navbar-brand">
-            jschon.dev
+            <span class="fs-3">🛸</span> jschon.dev
         </a>
-        <div class="flex-grow-1 mx-5 mt-1">
-            <div class="navbar-nav nav-pills nav-justified flex-row">
-                <button id="stable-btn" class="nav-link" onclick="setBranch('stable', '{{ stable_version }}');"></button>
-                <button id="next-btn" class="nav-link" onclick="setBranch('next', '{{ next_version }}');"></button>
-            </div>
-            <input id="branch" type="hidden"/>
-        </div>
         <ul class="nav justify-content-end">
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" title="documentation">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                    <img src="/static/readthedocs-logo-light.svg" style="height: 30px">
+                    <img src="/static/images/readthedocs-logo-light.svg" style="height: 30px">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="https://jschon.readthedocs.io/en/stable/" target="_blank">stable</a>
-                    <a class="dropdown-item" href="https://jschon.readthedocs.io/en/latest/" target="_blank">next</a>
+                    <a class="dropdown-item" href="https://jschon.readthedocs.io/en/latest/" target="_blank">dev</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" title="source code">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                    <img src="/static/GitHub-Mark-Light-64px.png" style="height: 30px">
+                    <img src="/static/images/GitHub-Mark-Light-64px.png" style="height: 30px">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="https://github.com/marksparkza/jschon" target="_blank">jschon</a>
@@ -44,6 +38,7 @@
             </li>
         </ul>
     </nav>
+
     <main class="flex-grow-1">
         <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark border-2"
              style="height: 45vh" onresize="schemaEditor.resize(); instanceEditor.resize();">
@@ -86,30 +81,26 @@
             <pre id="result"></pre>
         </div>
     </main>
+
     <hr>
     <footer class="d-flex justify-content-center px-3 pb-3">
         <small class="text-muted">
-            This site is a development testbed for the
-            <a class="text-decoration-none" href="https://github.com/marksparkza/jschon" target="_blank">jschon</a>
-            Python library.
-            No data is collected.
-            Kindly hosted by
-            <a class="text-decoration-none" href="https://www.saeon.ac.za/" target="_blank">SAEON</a>.
+            🛸 development website for
+            <a class="text-decoration-none" href="https://github.com/marksparkza/jschon" target="_blank">
+                jschon
+            </a> 🛸
         </small>
     </footer>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU" crossorigin="anonymous"></script>
-<script src="/static/ace-builds/src-min-noconflict/ace.js"></script>
-<script src="/static/js/eval.js"></script>
-<script src="/static/js/jump.js"></script>
-<script src="/static/js/ui.js"></script>
+
+<script src="/static/scripts/eval.js"></script>
+<script src="/static/scripts/jump.js"></script>
+<script src="/static/scripts/ui.js"></script>
 <script>
     schemaEditor.setValue('{"$id": "https://jschon.dev/schema"}');
     instanceEditor.setValue('{}');
     set$schema();
-    setBranch("next", "{{ next_version }}");
 </script>
+
 </body>
 </html>

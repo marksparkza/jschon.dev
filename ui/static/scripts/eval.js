@@ -16,7 +16,7 @@ function eval() {
     }
 
     $.ajax({
-        url: $("#branch").val() + "/evaluate",
+        url: "/evaluate",
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify({
