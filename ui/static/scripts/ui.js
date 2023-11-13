@@ -3,7 +3,7 @@ ace.config.set("basePath", "/static/ace-builds/src-min-noconflict");
 editorOptions = {
     mode: "ace/mode/json",
     theme: "ace/theme/clouds",
-    fontSize: "12.25px",
+    fontSize: "12px",
     printMargin: false,
     highlightActiveLine: false,
 };

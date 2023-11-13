@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="font-size: 13px">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,14 +13,14 @@
 <body>
 
 <div class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-dark bg-dark p-3">
-        <a class="navbar-brand">
-            <span class="fs-3">🛸</span> jschon.dev
+    <nav class="navbar navbar-dark bg-dark p-2">
+        <a href="" class="navbar-brand pb-2">
+            <span class="fs-3 mx-2">🛸</span> jschon.dev
         </a>
         <ul class="nav justify-content-end">
             <li class="nav-item dropdown" title="documentation">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                    <img src="/static/images/readthedocs-logo-light.svg" style="height: 30px">
+                    <img src="/static/images/readthedocs-logo-light.svg" style="height: 22px">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="https://jschon.readthedocs.io/en/stable/" target="_blank">stable</a>
@@ -29,7 +29,7 @@
             </li>
             <li class="nav-item dropdown" title="source code">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                    <img src="/static/images/GitHub-Mark-Light-64px.png" style="height: 30px">
+                    <img src="/static/images/GitHub-Mark-Light-64px.png" style="height: 22px">
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="https://github.com/marksparkza/jschon" target="_blank">jschon</a>
@@ -40,7 +40,7 @@
     </nav>
 
     <main class="flex-grow-1">
-        <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark border-2"
+        <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark"
              style="height: 45vh" onresize="schemaEditor.resize(); instanceEditor.resize();">
             <div class="d-flex flex-row mt-2 flex-grow-1">
                 <div id="schema-panel" class="pb-4 mb-2 pe-2" style="width: 50%">
@@ -66,8 +66,8 @@
                 <div class="col">
                     <select id="output-format" class="form-control">
                         <option value="flag">Output: Flag</option>
-                        <option value="basic">Output: Basic</option>
-                        <option value="detailed" selected>Output: Detailed</option>
+                        <option value="basic" selected>Output: Basic</option>
+                        <option value="detailed">Output: Detailed</option>
                         <option value="verbose">Output: Verbose</option>
                     </select>
                 </div>
@@ -82,8 +82,8 @@
         </div>
     </main>
 
-    <hr>
-    <footer class="d-flex justify-content-center px-3 pb-3">
+    <hr class="mb-0 mt-2">
+    <footer class="d-flex justify-content-center p-3 bg-light">
         <small class="text-muted">
             🛸 development website for
             <a class="text-decoration-none" href="https://github.com/marksparkza/jschon" target="_blank">
