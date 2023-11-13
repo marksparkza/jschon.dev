@@ -3,7 +3,7 @@ services:
     container_name: jschon-api
     build:
       context: .
-      dockerfile: api/dockerfile
+      dockerfile: api/Dockerfile
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
@@ -12,7 +12,7 @@ services:
     container_name: jschon-ui
     build:
       context: .
-      dockerfile: ui/dockerfile
+      dockerfile: ui/Dockerfile
     ports:
       - "8888:8888"
     environment:

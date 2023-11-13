@@ -5,12 +5,14 @@ import requests
 from jinja2 import Environment, FileSystemLoader
 from sanic import HTTPResponse, Request, Sanic, html, json
 
+ui_dir = Path(__file__).parent
+
 app = Sanic(
     'jschon-ui',
     env_prefix='JSCHON_',
 )
 app.ctx.template_env = Environment(
-    loader=FileSystemLoader('templates'),
+    loader=FileSystemLoader(ui_dir / 'templates'),
     autoescape=True,
 )
 app.ctx.template_env.globals |= dict(
@@ -18,7 +20,7 @@ app.ctx.template_env.globals |= dict(
 )
 app.static(
     '/static',
-    Path(__file__).parent / 'static',
+    ui_dir / 'static',
 )
 
 api = app.config.API
