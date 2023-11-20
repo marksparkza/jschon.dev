@@ -1,3 +1,10 @@
+function linkify(output, editor) {
+    var re = /("instanceLocation": ")(.+)(",\s*"keywordLocation")/g;
+    return output.replaceAll(
+        re, '$1<a onclick="jumpTo(\'$2\',' + editor + ');" href="#" class="fw-bold text-decoration-none">$2</a>$3'
+    );
+}
+
 function jumpTo(loc, editor) {
     try {
         JSON.parse(editor.getValue());
