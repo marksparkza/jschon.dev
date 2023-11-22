@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Any
 
 import requests
+import yaml
 from jinja2 import Environment, FileSystemLoader
 from sanic import HTTPResponse, Request, Sanic, html, json
 
@@ -15,9 +16,24 @@ app.ctx.template_env = Environment(
     loader=FileSystemLoader(ui_dir / 'templates'),
     autoescape=True,
 )
+
 app.ctx.template_env.globals |= dict(
     url_for=app.url_for,
 )
+
+with open(ui_dir / 'templates' / 'dependencies.yml') as f:
+    app.ctx.template_env.globals |= yaml.safe_load(f)
+
+with open(ui_dir / 'examples' / 'demo-schema.json') as f:
+    app.ctx.template_env.globals |= dict(
+        demo_schema=f.read()
+    )
+
+with open(ui_dir / 'examples' / 'demo-instance.json') as f:
+    app.ctx.template_env.globals |= dict(
+        demo_instance=f.read()
+    )
+
 app.static(
     '/static',
     ui_dir / 'static',

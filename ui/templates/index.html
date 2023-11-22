@@ -8,40 +8,23 @@
         jschon {{ version }}
     </title>
 
-    {% include 'lib.html' %}
+    <link id="bootswatch-css"
+          rel="stylesheet"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet"
+          href="{{ css.jquery_ui.href }}"
+          integrity="{{ css.jquery_ui.integrity }}"
+          crossorigin="anonymous">
+
 </head>
 <body>
-
 <div class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-dark bg-dark p-2">
-        <a href="" class="navbar-brand pb-2">
-            <span class="fs-3 mx-2">🛸</span> jschon.dev
-        </a>
-        <ul class="nav justify-content-end">
-            <li class="nav-item dropdown" title="documentation">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                    <img src="/static/images/readthedocs-logo-light.svg" style="height: 22px">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="https://jschon.readthedocs.io/en/stable/" target="_blank">stable</a>
-                    <a class="dropdown-item" href="https://jschon.readthedocs.io/en/latest/" target="_blank">dev</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown" title="source code">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
-                    <img src="/static/images/GitHub-Mark-Light-64px.png" style="height: 22px">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="https://github.com/marksparkza/jschon" target="_blank">jschon</a>
-                    <a class="dropdown-item" href="https://github.com/marksparkza/jschon.dev" target="_blank">jschon.dev</a>
-                </div>
-            </li>
-        </ul>
-    </nav>
+    {% include 'header.html' %}
 
     <main class="flex-grow-1">
         <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark"
-             style="height: 45vh" onresize="schemaEditor.resize(); instanceEditor.resize();">
+             style="height: 44vh" onresize="schemaEditor.resize(); instanceEditor.resize();">
             <div class="d-flex flex-row mt-2 flex-grow-1">
                 <div id="schema-panel" class="pb-4 mb-2 pe-2" style="width: 50%">
                     <label for="schema" class="form-label">JSON Schema</label>
@@ -82,16 +65,60 @@
         </div>
     </main>
 
-    <hr class="mb-0 mt-2">
-    <footer class="d-flex justify-content-center p-3 bg-light">
-        <small class="text-muted">
-            🛸 development website for
-            <a class="text-decoration-none" href="https://github.com/marksparkza/jschon" target="_blank">
-                jschon
-            </a> 🛸
-        </small>
-    </footer>
+    {% include 'footer.html' %}
 </div>
+
+<script src="{{ js.bootstrap.src }}"
+        integrity="{{ js.bootstrap.integrity }}"
+        crossorigin="anonymous"></script>
+
+<script src="{{ js.jquery.src }}"
+        integrity="{{ js.jquery.integrity }}"
+        crossorigin="anonymous"></script>
+
+<script src="{{ js.jquery_ui.src }}"
+        integrity="{{ js.jquery_ui.integrity }}"
+        crossorigin="anonymous"></script>
+
+<script src="{{ js.ace.src }}"
+        integrity="{{ js.ace.integrity }}"
+        crossorigin="anonymous"></script>
+
+<script src="/static/scripts/eval.js"></script>
+<script src="/static/scripts/jump.js"></script>
+
+<script>
+    setTheme('cerulean');
+
+    function setTheme(theme) {
+        $('.theme-selector').removeClass('active');
+        const link = $('#bootswatch-css');
+        {% for theme in css.bootswatch %}
+            if (theme === '{{ theme }}') {
+                link.prop('integrity', '{{ css.bootswatch[theme].integrity }}');
+                link.prop('href', '{{ css.bootswatch[theme].href }}');
+                $('#theme-{{ theme }}').addClass('active');
+            }
+        {% endfor %}
+    }
+
+    $("#input-panel").resizable({handles: "s", minHeight: 200});
+    $("#schema-panel").resizable({handles: "e", minWidth: 200});
+
+    editorOptions = {
+        mode: "ace/mode/json",
+        theme: "ace/theme/clouds",
+        fontSize: "12px",
+        printMargin: false,
+        highlightActiveLine: false,
+    };
+
+    const schemaEditor = ace.edit("schema", editorOptions);
+    schemaEditor.setValue(`{{ demo_schema | safe }}`, -1);
+
+    const instanceEditor = ace.edit("instance", editorOptions);
+    instanceEditor.setValue(`{{ demo_instance | safe }}`);
+</script>
 
 </body>
 </html>

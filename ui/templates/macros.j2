@@ -1,0 +1,16 @@
+{% macro nav_menu(title, image) %}
+    <li class="nav-item dropdown" title="{{ title }}">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+            <img src="{{ image }}" style="height: 20px">
+        </a>
+        <div class="dropdown-menu dropdown-menu-end">
+            {{ caller() }}
+        </div>
+    </li>
+{% endmacro %}
+
+{% macro nav_menu_link(text, url) %}
+    <a class="dropdown-item" href="{{ url }}" target="_blank">
+        {{ text }}
+    </a>
+{% endmacro %}

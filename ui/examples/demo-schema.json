@@ -1,0 +1,17 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://jschon.dev/demo",
+    "type": "array",
+    "items": {
+        "anyOf": [
+            {
+                "type": "string",
+                "description": "Cool! We got a string here!"
+            },
+            {
+                "type": "integer",
+                "description": "Hey! We got an integer here!"
+            }
+        ]
+    }
+}
