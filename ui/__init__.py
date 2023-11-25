@@ -21,7 +21,7 @@ app.ctx.template_env.globals |= dict(
     url_for=app.url_for,
 )
 
-with open(ui_dir / 'templates' / 'dependencies.yml') as f:
+with open(ui_dir / 'templates' / '3rdparty.yml') as f:
     app.ctx.template_env.globals |= yaml.safe_load(f)
 
 with open(ui_dir / 'examples' / 'demo-schema.json') as f:

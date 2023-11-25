@@ -88,16 +88,18 @@
 <script src="/static/scripts/jump.js"></script>
 
 <script>
-    setTheme('cerulean');
+    let theme = localStorage.getItem('theme');
+    setTheme(theme || 'cerulean');
 
     function setTheme(theme) {
-        $('.theme-selector').removeClass('active');
+        $('.theme-btn').removeClass('active');
         const link = $('#bootswatch-css');
         {% for theme in css.bootswatch %}
             if (theme === '{{ theme }}') {
                 link.prop('integrity', '{{ css.bootswatch[theme].integrity }}');
                 link.prop('href', '{{ css.bootswatch[theme].href }}');
-                $('#theme-{{ theme }}').addClass('active');
+                $('#theme-btn-{{ theme }}').addClass('active');
+                localStorage.setItem('theme', '{{ theme }}');
             }
         {% endfor %}
     }

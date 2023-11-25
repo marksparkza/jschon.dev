@@ -24,9 +24,8 @@
 
             {% call nav_menu('theme', '/static/images/bootswatch-logo.svg') %}
                 {% for theme in css.bootswatch %}
-                    <button id="theme-{{ theme }}" class="dropdown-item theme-selector"
-                            onclick="setTheme('{{ theme }}')">
-                        {{ theme }}
+                    <button id="theme-btn-{{ theme }}" class="dropdown-item theme-btn"
+                            onclick="setTheme('{{ theme }}')">{{ theme }}
                     </button>
                 {% endfor %}
             {% endcall %}
