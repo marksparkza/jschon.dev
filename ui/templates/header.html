@@ -1,9 +1,9 @@
 {% from 'macros.j2' import nav_menu, nav_menu_link %}
 
 <header>
-    <nav id="navbar" class="navbar navbar-dark bg-dark p-3">
-        <a href="" class="navbar-brand pb-2">
-            <span class="fs-4 mx-2">
+    <nav class="navbar bg-primary p-3" data-bs-theme="dark">
+        <a href="" class="navbar-brand pb-2" title="jschon {{ version }}">
+            <span class="fs-4 me-2">
                 🚀
             </span>
             <span>
@@ -17,13 +17,13 @@
                 {{ nav_menu_link('dev', 'https://jschon.readthedocs.io/en/latest/') }}
             {% endcall %}
 
-            {% call nav_menu('source', '/static/images/GitHub-Mark-Light-64px.png') %}
+            {% call nav_menu('source code', '/static/images/GitHub-Mark-Light-64px.png') %}
                 {{ nav_menu_link('jschon', 'https://github.com/marksparkza/jschon') }}
                 {{ nav_menu_link('jschon.dev', 'https://github.com/marksparkza/jschon.dev') }}
             {% endcall %}
 
             {% call nav_menu('theme', '/static/images/bootswatch-logo.svg') %}
-                {% for theme in css.bootswatch %}
+                {% for theme in css.bootswatch | sort %}
                     <button id="theme-btn-{{ theme }}" class="dropdown-item theme-btn"
                             onclick="setTheme('{{ theme }}')">{{ theme }}
                     </button>

@@ -1,20 +1,16 @@
 css:
   bootswatch:
-    cerulean:
-      href: https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/cerulean/bootstrap.min.css
-      integrity: sha256-UWALBbCbbM649IZa/rYTILDmnfc+fXuZQQ2awYBChIs=
+    superhero:
+      href: https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/superhero/bootstrap.min.css
+      integrity: sha256-bdUSMb20lEqbpyGgBUZi3XE1nXAqxzqFGsniJSO+FbA=
 
     slate:
       href: https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/slate/bootstrap.min.css
       integrity: sha256-EjEx4SRp7eCTAf5JNZBYpfI/YMo92NCt6WI0uWKI71w=
 
-    spacelab:
-      href: https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/spacelab/bootstrap.min.css
-      integrity: sha256-lnnmSLxlEWwZdECBLf2Nh7bZPL/Y027fQOMPke/1Up4=
-
-    superhero:
-      href: https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/superhero/bootstrap.min.css
-      integrity: sha256-bdUSMb20lEqbpyGgBUZi3XE1nXAqxzqFGsniJSO+FbA=
+    cerulean:
+      href: https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/cerulean/bootstrap.min.css
+      integrity: sha256-UWALBbCbbM649IZa/rYTILDmnfc+fXuZQQ2awYBChIs=
 
   jquery_ui:
     href: https://cdn.jsdelivr.net/npm/jquery-ui@1.13.2/dist/themes/base/jquery-ui.min.css
