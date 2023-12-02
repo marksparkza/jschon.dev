@@ -25,11 +25,15 @@ markupsafe==2.1.3
 multidict==6.0.4
     # via sanic
 pyyaml==6.0.1
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   sanic-ext
 requests==2.31.0
     # via -r requirements.in
-sanic==23.6.0
+sanic[ext]==23.6.0
     # via -r requirements.in
+sanic-ext==23.6.0
+    # via sanic
 sanic-routing==23.6.0
     # via sanic
 tracerite==1.1.1

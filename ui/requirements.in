@@ -1,4 +1,4 @@
-sanic
+sanic[ext]
 jinja2
 requests
 pyyaml

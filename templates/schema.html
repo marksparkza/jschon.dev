@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div id="input-panel" class="container-fluid d-flex flex-column border-bottom border-dark"
+         style="height: 44vh" onresize="schemaEditor.resize(); instanceEditor.resize();">
+        <div class="d-flex flex-row mt-2 flex-grow-1">
+            <div id="schema-panel" class="pb-4 mb-2 pe-2" style="width: 50%">
+                <label for="schema" class="form-label">JSON Schema</label>
+                <div id="schema" class="form-control rounded-0 w-100 h-100"></div>
+            </div>
+            <div class="pb-4 mb-2 ps-2 flex-grow-1">
+                <label for="instance" class="form-label">JSON Instance</label>
+                <div id="instance" class="form-control rounded-0 w-100 h-100"></div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <select id="metaschema-uri" class="form-control" onchange="set$schema();">
+                    <option value="https://json-schema.org/draft/2019-09/schema">Meta-schema: 2019-09</option>
+                    <option value="https://json-schema.org/draft/2020-12/schema" selected>Meta-schema: 2020-12</option>
+                </select>
+            </div>
+            <div class="col-6 d-grid">
+                <input id="evaluate" type="button" value="Evaluate" onclick="eval();"
+                       class="btn btn-primary">
+            </div>
+            <div class="col">
+                <select id="output-format" class="form-control">
+                    <option value="flag">Output: Flag</option>
+                    <option value="basic" selected>Output: Basic</option>
+                    <option value="detailed">Output: Detailed</option>
+                    <option value="verbose">Output: Verbose</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="m-3">
+        <span id="result-caption" class="fs-5"></span>
+        <p id="result-subcaption" class="text-muted d-none"></p>
+    </div>
+    <div class="mx-3 flex-grow-1">
+        <pre id="result"></pre>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="/static/scripts/schema.js"></script>
+
+    <script>
+        $("#input-panel").resizable({handles: "s", minHeight: 200});
+        $("#schema-panel").resizable({handles: "e", minWidth: 200});
+
+        editorOptions = {
+            mode: "ace/mode/json",
+            theme: "ace/theme/clouds",
+            fontSize: "12px",
+            printMargin: false,
+            highlightActiveLine: false,
+        };
+
+        const schemaEditor = ace.edit("schema", editorOptions);
+        schemaEditor.setValue(`{{ demo_schema | safe }}`, -1);
+
+        const instanceEditor = ace.edit("instance", editorOptions);
+        instanceEditor.setValue(`{{ demo_instance | safe }}`);
+    </script>
+{% endblock %}
