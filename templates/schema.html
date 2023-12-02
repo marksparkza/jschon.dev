@@ -60,9 +60,19 @@
         };
 
         const schemaEditor = ace.edit("schema", editorOptions);
-        schemaEditor.setValue(`{{ demo_schema | safe }}`, -1);
+        schemaEditor.setValue(
+            localStorage.getItem('schema') || `{{ demo_schema | safe }}`, -1
+        );
+        schemaEditor.session.on('change', function(delta) {
+            localStorage.setItem('schema', schemaEditor.getValue())
+        });
 
         const instanceEditor = ace.edit("instance", editorOptions);
-        instanceEditor.setValue(`{{ demo_instance | safe }}`);
+        instanceEditor.setValue(
+            localStorage.getItem('instance') || `{{ demo_instance | safe }}`, -1
+        );
+        instanceEditor.session.on('change', function(delta) {
+            localStorage.setItem('instance', instanceEditor.getValue())
+        });
     </script>
 {% endblock %}

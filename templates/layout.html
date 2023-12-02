@@ -47,8 +47,7 @@
 
 {% block scripts %}
     <script>
-        let theme = localStorage.getItem('theme');
-        setTheme(theme || 'cerulean');
+        setTheme(localStorage.getItem('theme') || 'cerulean');
 
         function setTheme(theme) {
             $('.theme-btn').removeClass('active');

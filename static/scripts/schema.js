@@ -1,8 +1,7 @@
 function set$schema() {
     schema = JSON.parse(schemaEditor.getValue());
     schema.$schema = $("#metaschema-uri").children("option:selected").val();
-    schemaEditor.setValue(JSON.stringify(schema, null, 4));
-    schemaEditor.gotoLine(1);
+    schemaEditor.setValue(JSON.stringify(schema, null, 4), -1);
 }
 
 function eval() {
