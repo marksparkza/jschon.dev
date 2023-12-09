@@ -19,14 +19,58 @@
 </head>
 <body>
 <div class="d-flex flex-column min-vh-100">
-    {% include 'header.html' %}
+    <header>
+        <nav class="navbar bg-primary p-3" data-bs-theme="dark">
+            <a href="/" class="navbar-brand pb-2">
+                <span class="fs-4 me-2">
+                    🚀
+                </span>
+                <span>
+                    jschon.dev
+                </span>
+            </a>
+
+            <ul class="nav nav-pills">
+                {% from 'macros.j2' import nav_menu, nav_menu_link %}
+
+                {% call nav_menu('documentation', '/static/images/readthedocs.svg') %}
+                    {{ nav_menu_link('stable', 'https://jschon.readthedocs.io/en/stable/') }}
+                    {{ nav_menu_link('dev', 'https://jschon.readthedocs.io/en/latest/') }}
+                {% endcall %}
+
+                {% call nav_menu('source code', '/static/images/github.png') %}
+                    {{ nav_menu_link('jschon', 'https://github.com/marksparkza/jschon') }}
+                    {{ nav_menu_link('jschon.dev', 'https://github.com/marksparkza/jschon.dev') }}
+                {% endcall %}
+
+                {% call nav_menu('theme', '/static/images/bootswatch.svg') %}
+                    {% for theme in css.bootswatch | sort %}
+                        <button id="theme-btn-{{ theme }}" class="dropdown-item theme-btn"
+                                onclick="setTheme('{{ theme }}')">{{ theme }}
+                        </button>
+                    {% endfor %}
+                {% endcall %}
+            </ul>
+        </nav>
+    </header>
 
     <main class="flex-grow-1">
         {% block content %}
         {% endblock %}
     </main>
 
-    {% include 'footer.html' %}
+    <footer>
+        <hr class="mb-0 mt-2">
+        <div class="d-flex justify-content-center p-3 bg-secondary">
+            <small>
+                ⚒ development website for
+                <a class="text-decoration-none"
+                   href="https://github.com/marksparkza/jschon" target="_blank">
+                    jschon {{ version }}
+                </a> ⚒
+            </small>
+        </div>
+    </footer>
 </div>
 
 <script src="{{ js.bootstrap.src }}"
