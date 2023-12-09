@@ -12,10 +12,14 @@
           rel="stylesheet"
           crossorigin="anonymous">
 
-    <link rel="stylesheet"
-          href="{{ css.jquery_ui.href }}"
-          integrity="{{ css.jquery_ui.integrity }}"
-          crossorigin="anonymous">
+    {% for name, lib in css.items() %}
+        {% if name != 'bootswatch' %}
+            <link rel="stylesheet"
+                  href="{{ lib.href }}"
+                  integrity="{{ lib.integrity }}"
+                  crossorigin="anonymous">
+        {% endif %}
+    {% endfor %}
 </head>
 <body>
 <div class="d-flex flex-column min-vh-100">
@@ -73,21 +77,11 @@
     </footer>
 </div>
 
-<script src="{{ js.bootstrap.src }}"
-        integrity="{{ js.bootstrap.integrity }}"
-        crossorigin="anonymous"></script>
-
-<script src="{{ js.jquery.src }}"
-        integrity="{{ js.jquery.integrity }}"
-        crossorigin="anonymous"></script>
-
-<script src="{{ js.jquery_ui.src }}"
-        integrity="{{ js.jquery_ui.integrity }}"
-        crossorigin="anonymous"></script>
-
-<script src="{{ js.ace.src }}"
-        integrity="{{ js.ace.integrity }}"
-        crossorigin="anonymous"></script>
+{% for lib in js.values() %}
+    <script src="{{ lib.src }}"
+            integrity="{{ lib.integrity }}"
+            crossorigin="anonymous"></script>
+{% endfor %}
 
 {% block scripts %}
     <script>
